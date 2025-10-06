@@ -12,6 +12,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
+    .product-media img{
+  width:100%;
+  height:100%;
+  object-fit: cover;   /* يملأ الإطار بدون تشويه */
+  border-radius: 12px; /* نعومة بسيطة للحواف */
+}
+
     :root{
       --steel-bg:#f2f3f5;          /* معدني فاتح */
       --steel-panel:#ffffff;       /* بطاقات بيضاء */
@@ -255,50 +262,72 @@
     </div>
   </section>
 
-  <!-- Products -->
-  <section id="products" class="py-5">
-    <div class="container">
-      <h2 class="section-title text-center mb-4" data-i18n="products_title">منتجاتنا</h2>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col reveal">
-          <div class="product-card h-100">
-            <div class="product-media">
-              <img src="prodect1.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
-            </div>
-            <div class="p-3">
-              <h5 data-i18n="p1_title">حديد التسليح</h5>
-              <p class="muted mb-3" data-i18n="p1_desc">مقاسات متعدّدة مطابقة للمقاييس.</p>
-              <a href="#contact" class="btn btn-sm btn-accent glow" data-i18n="learn_more">المزيد</a>
-            </div>
+
+<section id="products" class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-4" data-i18n="products_title">منتجاتنا</h2>
+    <p class="text-center muted mb-5" data-i18n="products_sub">تشكيلة فولاذ عالية الجودة.</p>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+
+      <!-- Billet -->
+      <div class="col reveal">
+        <div class="product-card h-100">
+          <div class="product-media">
+            <img src="billet.png" alt="Billet Steel" loading="lazy">
           </div>
-        </div>
-        <div class="col reveal">
-          <div class="product-card h-100">
-            <div class="product-media">
-              <img src="prodect2.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
-            </div>
-            <div class="p-3">
-              <h5 data-i18n="p2_title">الواصلات الميكانيكية (كابلر)</h5>
-              <p class="muted mb-3" data-i18n="p2_desc">حلول وصل دقيقة وعالية الاعتمادية.</p>
-              <a href="#contact" class="btn btn-sm btn-accent glow" data-i18n="learn_more">المزيد</a>
-            </div>
-          </div>
-        </div>
-        <div class="col reveal">
-          <div class="product-card h-100">
-            <div class="product-media">
-              <img src="prodect3.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
-            </div>
-            <div class="p-3">
-              <h5 data-i18n="p3_title">شبك الصبّات</h5>
-              <p class="muted mb-3" data-i18n="p3_desc">شبكات متينة لأعمال الخرسانة.</p>
-              <a href="#contact" class="btn btn-sm btn-accent glow" data-i18n="learn_more">المزيد</a>
-            </div>
+          <div class="p-3">
+            <h5 data-i18n="billet_t">بليت</h5>
+            <p class="muted mb-3" data-i18n="billet_d">قضبان فولاذية أولية عالية الجودة لتصنيع الحديد والسبائك.</p>
           </div>
         </div>
       </div>
+
+      <!-- Wire Rod -->
+      <div class="col reveal">
+        <div class="product-card h-100">
+          <div class="product-media">
+            <img src="wroll.png" alt="Wire Rod" loading="lazy">
+          </div>
+          <div class="p-3">
+            <h5 data-i18n="wire_t">قضيب سلكي</h5>
+            <p class="muted mb-3" data-i18n="wire_d">أسلاك فولاذية دقيقة تستخدم في الصناعات والإنشاءات.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roll -->
+      <div class="col reveal">
+        <div class="product-card h-100">
+          <div class="product-media">
+            <img src="roll.png" alt="Steel Roll" loading="lazy">
+          </div>
+          <div class="p-3">
+            <h5 data-i18n="roll_t">رولات</h5>
+            <p class="muted mb-3" data-i18n="roll_d">رولات فولاذية مصممة للدرفلة والتشكيل الصناعي الثقيل.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRC -->
+      <div class="col reveal">
+        <div class="product-card h-100">
+          <div class="product-media">
+            <img src="brc.png" alt="BRC Mesh" loading="lazy">
+          </div>
+          <div class="p-3">
+            <h5 data-i18n="brc_t">BRC</h5>
+            <p class="muted mb-3" data-i18n="brc_d">شبكات حديدية مسبقة الصنع تستخدم في الأساسات والخرسانة.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
+
+
+
 
   <!-- Why Us -->
   <section id="why" class="py-5">
@@ -337,30 +366,7 @@
     </div>
   </section>
 
-  <!-- Partners -->
-  <!-- <section id="partners" class="py-5">
-    <div class="container">
-      <h2 class="section-title text-center mb-4" data-i18n="partners_title">شركاؤنا</h2>
-      <p class="text-center muted mb-4" data-i18n="partners_sub">أضف شعارات الشركاء عند توفرها.</p>
-      <div class="row g-4 justify-content-center">
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-          <div class="product-card p-3 text-center">
-            <div class="product-media partner">Logo</div>
-          </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-          <div class="product-card p-3 text-center">
-            <div class="product-media partner">Logo</div>
-          </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-          <div class="product-card p-3 text-center">
-            <div class="product-media partner">Logo</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
+  
 
   <!-- Contact -->
   <section id="contact" class="py-5">
@@ -415,6 +421,19 @@
     // ترجمات ثنائية اللغة (عربي افتراضي)
     const T = {
       ar:{
+                // Products (details)
+        billet_media:"Billet", billet_t:"بليت",
+        billet_d:"قضبان فولاذية أولية عالية الجودة لتصنيع الحديد والسبائك.",
+
+        wire_media:"Wire Rod", wire_t:"قضيب سلكي",
+        wire_d:"أسلاك فولاذية دقيقة تستخدم في الصناعات والإنشاءات.",
+
+        roll_media:"Roll", roll_t:"رولات",
+        roll_d:"رولات فولاذية مصممة للدرفلة والتشكيل الصناعي الثقيل.",
+
+        brc_media:"BRC", brc_t:"BRC",
+        brc_d:"شبكات حديدية مسبقة الصنع تستخدم في الأساسات والخرسانة.",
+
         brand_ar:"النيل للفولاذ",
         brand_en_small:"Nile Steel Factory",
         nav_home:"الرئيسية", nav_about:"من نحن", nav_products:"منتجاتنا", nav_why:"لماذا نحن", nav_partners:"شركاؤنا", nav_contact:"اتصل بنا",
@@ -443,6 +462,19 @@
         footer_brand:"النيل للفولاذ", footer_tag:"فولاذ يصنع الغد."
       },
       en:{
+              // Products (details)
+        billet_media:"Billet", billet_t:"Billet",
+        billet_d:"High-quality primary steel billets for further processing.",
+
+        wire_media:"Wire Rod", wire_t:"Wire Rod",
+        wire_d:"Precision steel wire for industrial and construction applications.",
+
+        roll_media:"Roll", roll_t:"Roll",
+        roll_d:"Durable steel rolls designed for heavy rolling and forming.",
+
+        brc_media:"BRC", brc_t:"BRC Mesh",
+        brc_d:"Factory-made reinforcing mesh for foundations and concrete works.",
+
         brand_ar:"Nile Steel Factory",
         brand_en_small:"Nile Steel Factory",
         nav_home:"Home", nav_about:"About", nav_products:"Products", nav_why:"Why Us", nav_partners:"Partners", nav_contact:"Contact",

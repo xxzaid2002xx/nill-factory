@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>النيل للفولاذ | Nile Steel Factory</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --steel-bg:#f2f3f5;          /* معدني فاتح */
+      --steel-panel:#ffffff;       /* بطاقات بيضاء */
+      --steel-text:#1c1f22;        /* نص داكن محايد */
+      --steel-sub:#6b7076;         /* نص ثانوي */
+      --accent:#ff7a1a;            /* برتقالي دافئ */
+      --accent-dark:#e06814;       /* أغمق قليلاً */
+      --accent-glow:rgba(255,122,26,.45);
+      --grid-line:rgba(0,0,0,.05);
+    }
+
+    html,body{ background: var(--steel-bg); color: var(--steel-text); }
+
+    /* خلفية بنقش معدني خفيف */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.6), rgba(255,255,255,0)) ,
+        repeating-linear-gradient(0deg, transparent 0 22px, var(--grid-line) 22px 23px);
+      pointer-events:none; z-index:-1;
+    }
+
+    /* شريط علوي */
+    .navbar{
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,.8);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .brand-mark{
+      font-weight: 800;
+      letter-spacing: .5px;
+      display:flex; align-items:center; gap:.6rem;
+      text-decoration:none; color:var(--steel-text);
+    }
+    .brand-badge{
+      display:inline-grid; place-items:center;
+      width:42px; height:42px; border-radius:10px;
+      background: radial-gradient(circle at 30% 30%, #ffa86a, #ff7a1a 55%, #c65300 100%);
+      color:#111; font-weight:900; font-size:18px;
+      box-shadow: 0 0 0 6px rgba(255,122,26,.08), 0 8px 22px rgba(0,0,0,.12);
+    }
+    .brand-text{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", "Noto Sans", Arial, sans-serif;
+      line-height:1.05;
+    }
+    .brand-text strong{ display:block; font-size:1.05rem }
+    .brand-text span{ font-size:.78rem; color:var(--steel-sub) }
+
+    /* بطل الصفحة */
+    .hero{
+      position:relative; overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(255,122,26,.08), transparent 40%),
+        radial-gradient(1000px 300px at 50% -10%, rgba(255,122,26,.25), transparent 70%),
+        linear-gradient(0deg, var(--steel-bg), var(--steel-bg));
+      padding: 8rem 0 5rem;
+    }
+    .hero h1{
+      font-weight:900; letter-spacing:.2px;
+      text-shadow: 0 1px 0 #fff;
+    }
+    .hero p{ color:var(--steel-sub); max-width: 56ch }
+    .glow{
+      position:relative;
+      box-shadow:
+        0 0 0 0 rgba(255,122,26,0.45),
+        0 12px 24px rgba(0,0,0,.12) !important;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .glow:hover{
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 0 8px var(--accent-glow),
+        0 12px 24px rgba(0,0,0,.18) !important;
+    }
+    .btn-accent{
+      background: var(--accent); color:#111; border:none;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .btn-accent:hover{ background: var(--accent-dark); color:#111 }
+
+    /* أقسام */
+    .section-title{
+      font-weight:900; letter-spacing:.3px;
+    }
+    .muted{ color: var(--steel-sub) }
+
+    /* بطاقات المنتجات */
+    .product-card{
+      background: var(--steel-panel);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      overflow:hidden;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+    .product-card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.10);
+      border-color: rgba(255,122,26,.35);
+    }
+    .product-media{
+      aspect-ratio: 16/9; background:
+        linear-gradient(135deg, #f6f6f7, #eceff3);
+      display:grid; place-items:center; color:var(--steel-sub);
+      font-weight:700; letter-spacing:.2px;
+    }
+
+    /* لماذا نحن */
+    .feature{
+      background: var(--steel-panel);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius:16px; padding:1.25rem;
+      height:100%;
+      transition: border-color .25s ease, transform .25s ease;
+    }
+    .feature:hover{ transform: translateY(-2px); border-color: rgba(255,122,26,.35) }
+    .feature i{ color: var(--accent); font-size:1.5rem }
+
+    /* شركاؤنا */
+    .partner{
+      filter: grayscale(100%) contrast(95%);
+      opacity:.75; transition: all .25s ease;
+    }
+    .partner:hover{ filter:none; opacity:1 }
+
+    /* تذييل بسيط */
+    footer{
+      border-top:1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.8);
+      backdrop-filter: blur(6px);
+    }
+
+    /* فقاعة واتساب */
+    .whatsapp-float{
+      position:fixed; bottom:20px; inset-inline-end:20px;
+      width:56px; height:56px; border-radius:14px;
+      display:grid; place-items:center;
+      background: #25D366; color:#fff; font-size:28px;
+      box-shadow: 0 12px 24px rgba(0,0,0,.18);
+      transition: transform .25s ease;
+      z-index:1000;
+    }
+    .whatsapp-float:hover{ transform: translateY(-3px) }
+
+    /* حركات خفيفة */
+    @keyframes slideInUp{ from{ opacity:0; transform: translateY(18px) } to{ opacity:1; transform:none } }
+    .reveal{ animation: slideInUp .6s ease both; }
+
+    /* دعم تغيير الاتجاه مع اللغة */
+    [dir="ltr"] .brand-text strong{ font-size:.95rem }
+    [dir="ltr"] body{ text-align:left }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top py-2">
+    <div class="container">
+      <a class="navbar-brand brand-mark" href="#home">
+        <span class="brand-badge">N</span>
+        <span class="brand-text">
+          <strong data-i18n="brand_ar">النيل للفولاذ</strong>
+          <span data-i18n="brand_en_small">Nile Steel Factory</span>
+        </span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-2">
+          <li class="nav-item"><a class="nav-link" href="#home" data-i18n="nav_home">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav_about">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products" data-i18n="nav_products">منتجاتنا</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why" data-i18n="nav_why">لماذا نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="#partners" data-i18n="nav_partners">شركاؤنا</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav_contact">اتصل بنا</a></li>
+        </ul>
+        <div class="ms-lg-3 d-flex align-items-center">
+          <button id="langToggle" class="btn btn-sm btn-accent glow">
+            <i class="bi bi-translate me-1"></i>
+            <span data-i18n="btn_lang">English</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7 reveal">
+          <h1 class="display-5 mb-3" data-i18n="hero_title">
+            فولاذ يصنع الغد — جودة تعتمد عليها
+          </h1>
+          <p class="lead mb-4" data-i18n="hero_sub">
+            في النيل للفولاذ نقدّم منتجات حديد موثوقة بمعايير تصنيع دقيقة، وتصميم بسيط يليق بورش المعادن الحديثة.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="#products" class="btn btn-accent glow" data-i18n="cta_products">استعرض المنتجات</a>
+            <a href="#contact" class="btn btn-outline-dark glow" data-i18n="cta_contact">تواصل معنا</a>
+          </div>
+        </div>
+        <div class="col-lg-5 reveal">
+          <div class="product-card p-4">
+            <div class="product-media rounded mb-3">
+                <img src="production line.png" alt="خط الدرفلة في مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6 order-lg-2 reveal">
+          <div class="product-card p-0 overflow-hidden">
+            <div class="product-media">
+              <img src="nill steel.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1 reveal">
+          <h2 class="section-title mb-3" data-i18n="about_title">من نحن</h2>
+          <p class="mb-3" data-i18n="about_p1">
+            النيل للفولاذ مصنع عراقي يقدّم حلولًا متكاملة في تصنيع الحديد بمقاييس دقيقة وأسعار عادلة، مع التزام بالسلامة والكفاءة.
+          </p>
+          <p class="mb-4 muted" data-i18n="about_p2">
+            رؤيتنا بسيطة: فولاذ موثوق، تسليم منضبط، وتجربة عميل واضحة بلا تعقيد.
+          </p>
+          <a href="#contact" class="btn btn-accent glow" data-i18n="about_cta">اطلب عرض سعر</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="py-5">
+    <div class="container">
+      <h2 class="section-title text-center mb-4" data-i18n="products_title">منتجاتنا</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col reveal">
+          <div class="product-card h-100">
+            <div class="product-media">
+              <img src="prodect1.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="p-3">
+              <h5 data-i18n="p1_title">حديد التسليح</h5>
+              <p class="muted mb-3" data-i18n="p1_desc">مقاسات متعدّدة مطابقة للمقاييس.</p>
+              <a href="#contact" class="btn btn-sm btn-accent glow" data-i18n="learn_more">المزيد</a>
+            </div>
+          </div>
+        </div>
+        <div class="col reveal">
+          <div class="product-card h-100">
+            <div class="product-media">
+              <img src="prodect2.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="p-3">
+              <h5 data-i18n="p2_title">الواصلات الميكانيكية (كابلر)</h5>
+              <p class="muted mb-3" data-i18n="p2_desc">حلول وصل دقيقة وعالية الاعتمادية.</p>
+              <a href="#contact" class="btn btn-sm btn-accent glow" data-i18n="learn_more">المزيد</a>
+            </div>
+          </div>
+        </div>
+        <div class="col reveal">
+          <div class="product-card h-100">
+            <div class="product-media">
+              <img src="prodect3.png" alt="مصنع النيل للفولاذ" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="p-3">
+              <h5 data-i18n="p3_title">شبك الصبّات</h5>
+              <p class="muted mb-3" data-i18n="p3_desc">شبكات متينة لأعمال الخرسانة.</p>
+              <a href="#contact" class="btn btn-sm btn-accent glow" data-i18n="learn_more">المزيد</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why" class="py-5">
+    <div class="container">
+      <h2 class="section-title text-center mb-4" data-i18n="why_title">لماذا النيل للفولاذ؟</h2>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature">
+            <i class="bi bi-check2-circle"></i>
+            <h5 class="mt-2" data-i18n="why1_t">خبرة صناعية</h5>
+            <p class="muted mb-0" data-i18n="why1_d">فهم واقعي لاحتياجات مشاريع البناء.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature">
+            <i class="bi bi-truck"></i>
+            <h5 class="mt-2" data-i18n="why2_t">تسليم منضبط</h5>
+            <p class="muted mb-0" data-i18n="why2_d">مواعيد واضحة وتتبّع مرن للطلبات.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature">
+            <i class="bi bi-shield-check"></i>
+            <h5 class="mt-2" data-i18n="why3_t">اعتمادية وجودة</h5>
+            <p class="muted mb-0" data-i18n="why3_d">اختبارات ومواصفات مطابقة للمقاييس.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature">
+            <i class="bi bi-people"></i>
+            <h5 class="mt-2" data-i18n="why4_t">دعم سريع</h5>
+            <p class="muted mb-0" data-i18n="why4_d">قنوات تواصل مباشرة وبسيطة.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <!-- <section id="partners" class="py-5">
+    <div class="container">
+      <h2 class="section-title text-center mb-4" data-i18n="partners_title">شركاؤنا</h2>
+      <p class="text-center muted mb-4" data-i18n="partners_sub">أضف شعارات الشركاء عند توفرها.</p>
+      <div class="row g-4 justify-content-center">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+          <div class="product-card p-3 text-center">
+            <div class="product-media partner">Logo</div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+          <div class="product-card p-3 text-center">
+            <div class="product-media partner">Logo</div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+          <div class="product-card p-3 text-center">
+            <div class="product-media partner">Logo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Contact -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="section-title text-center mb-4" data-i18n="contact_title">اتصل بنا</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4 reveal">
+          <div class="feature h-100 text-center">
+            <i class="bi bi-telephone-fill"></i>
+            <h5 class="mt-2" data-i18n="contact_phone">الهاتف</h5>
+            <p style="direction: ltr;" class="mb-0">+964 774 040 0086</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="feature h-100 text-center">
+            <i class="bi bi-envelope-at-fill"></i>
+            <h5 class="mt-2" data-i18n="contact_email">البريد الإلكتروني</h5>
+            <p class="mb-0">nilefulath@gmail.com</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="feature h-100 text-center">
+            <i class="bi bi-geo-alt-fill"></i>
+            <h5 class="mt-2" data-i18n="contact_address">العنوان</h5>
+            <p class="mb-0" data-i18n="contact_address_val">العراق - السماوة</p>
+            <a href="#" class="btn btn-sm btn-accent mt-2 glow" data-i18n="view_map">عرض الموقع</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-3">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="small muted">© <span id="year"></span> <span data-i18n="footer_brand">النيل للفولاذ</span></div>
+      <div class="small"><span data-i18n="footer_tag">فولاذ يصنع الغد.</span></div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a class="whatsapp-float" href="https://wa.me/9647740400086" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // سنة ديناميكية
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ترجمات ثنائية اللغة (عربي افتراضي)
+    const T = {
+      ar:{
+        brand_ar:"النيل للفولاذ",
+        brand_en_small:"Nile Steel Factory",
+        nav_home:"الرئيسية", nav_about:"من نحن", nav_products:"منتجاتنا", nav_why:"لماذا نحن", nav_partners:"شركاؤنا", nav_contact:"اتصل بنا",
+        btn_lang:"English",
+        hero_title:"فولاذ يصنع الغد — جودة تعتمد عليها",
+        hero_sub:"في النيل للفولاذ نقدّم منتجات حديد موثوقة بمعايير تصنيع دقيقة، وتصميم بسيط يليق بورش المعادن الحديثة.",
+        cta_products:"استعرض المنتجات", cta_contact:"تواصل معنا",
+        hero_media:"صورة توضيحية لخط الدرفلة", hero_note:"* يمكنك استبدال هذه المساحة بصورة من المصنع أو خط الإنتاج لاحقًا.",
+        about_title:"من نحن",
+        about_p1:"النيل للفولاذ مصنع عراقي يقدّم حلولًا متكاملة في تصنيع الحديد بمقاييس دقيقة وأسعار عادلة، مع التزام بالسلامة والكفاءة.",
+        about_p2:"رؤيتنا بسيطة: فولاذ موثوق، تسليم منضبط، وتجربة عميل واضحة بلا تعقيد.",
+        about_cta:"اطلب عرض سعر",
+        products_title:"منتجاتنا", products_sub:"تشكيلة مختصرة وواضحة — قابلة للتوسّع لاحقًا.",
+        p1_media:"Rebar", p1_title:"حديد التسليح", p1_desc:"مقاسات متعدّدة مطابقة للمقاييس.",
+        p2_media:"Couplers", p2_title:"الواصلات الميكانيكية (كابلر)", p2_desc:"حلول وصل دقيقة وعالية الاعتمادية.",
+        p3_media:"Mesh", p3_title:"شبك الصبّات", p3_desc:"شبكات متينة لأعمال الخرسانة.",
+        learn_more:"المزيد",
+        why_title:"لماذا النيل للفولاذ؟",
+        why1_t:"خبرة صناعية", why1_d:"فهم واقعي لاحتياجات مشاريع البناء.",
+        why2_t:"تسليم منضبط", why2_d:"مواعيد واضحة وتتبّع مرن للطلبات.",
+        why3_t:"اعتمادية وجودة", why3_d:"اختبارات ومواصفات مطابقة للمقاييس.",
+        why4_t:"دعم سريع", why4_d:"قنوات تواصل مباشرة وبسيطة.",
+        partners_title:"شركاؤنا", partners_sub:"أضف شعارات الشركاء عند توفرها.",
+        contact_title:"اتصل بنا",
+        contact_phone:"الهاتف", contact_email:"البريد الإلكتروني", contact_address:"العنوان", contact_address_val:"العراق - بغداد", view_map:"عرض الموقع",
+        footer_brand:"النيل للفولاذ", footer_tag:"فولاذ يصنع الغد."
+      },
+      en:{
+        brand_ar:"Nile Steel Factory",
+        brand_en_small:"Nile Steel Factory",
+        nav_home:"Home", nav_about:"About", nav_products:"Products", nav_why:"Why Us", nav_partners:"Partners", nav_contact:"Contact",
+        btn_lang:"العربية",
+        hero_title:"Steel that shapes tomorrow — dependable quality",
+        hero_sub:"At Nile Steel Factory, we deliver reliable steel products with precise standards and a clean, workshop-inspired design.",
+        cta_products:"Browse Products", cta_contact:"Contact Us",
+        hero_media:"Hot rolling line placeholder", hero_note:"* Replace this placeholder with a real factory/production photo later.",
+        about_title:"About Us",
+        about_p1:"Nile Steel Factory delivers integrated steel manufacturing solutions with precise specs and fair pricing, committed to safety and efficiency.",
+        about_p2:"Our vision is simple: reliable steel, disciplined delivery, and a clear customer experience.",
+        about_cta:"Request a Quote",
+        products_title:"Our Products", products_sub:"A concise selection — expandable later.",
+        p1_media:"Rebar", p1_title:"Rebar", p1_desc:"Multiple sizes conforming to standards.",
+        p2_media:"Couplers", p2_title:"Mechanical Couplers", p2_desc:"Accurate, high-reliability splicing solutions.",
+        p3_media:"Mesh", p3_title:"Concrete Mesh", p3_desc:"Durable mesh for concrete works.",
+        learn_more:"Learn More",
+        why_title:"Why Nile Steel?",
+        why1_t:"Industrial Expertise", why1_d:"Practical understanding of construction needs.",
+        why2_t:"Disciplined Delivery", why2_d:"Clear timelines and flexible tracking.",
+        why3_t:"Quality & Reliability", why3_d:"Testing and specs aligned to standards.",
+        why4_t:"Fast Support", why4_d:"Direct, simple communication.",
+        partners_title:"Our Partners", partners_sub:"Add partner logos when available.",
+        contact_title:"Contact Us",
+        contact_phone:"Phone", contact_email:"Email", contact_address:"Address", contact_address_val:"Baghdad, Iraq", view_map:"View Map",
+        footer_brand:"Nile Steel Factory", footer_tag:"Steel that shapes tomorrow."
+      }
+    };
+
+    let lang = 'ar'; // العربية افتراضياً
+    const $ = (sel, ctx=document)=> Array.from(ctx.querySelectorAll(sel));
+
+    function applyLang(l){
+      const map = T[l];
+      $('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(map[key]!==undefined){ el.textContent = map[key]; }
+      });
+      // اتجاه الصفحة
+      document.documentElement.lang = (l==='ar'?'ar':'en');
+      document.documentElement.dir  = (l==='ar'?'rtl':'ltr');
+    }
+
+    document.getElementById('langToggle').addEventListener('click', ()=>{
+      lang = (lang==='ar'?'en':'ar');
+      applyLang(lang);
+    });
+
+    // بدءًا بالعربية
+    applyLang('ar');
+  </script>
+</body>
+</html>
